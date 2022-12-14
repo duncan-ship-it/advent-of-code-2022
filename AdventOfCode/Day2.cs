@@ -22,9 +22,9 @@ namespace AdventOfCode
                     return playerValue + 3;   // draw: same shape
                 case 1:
                 case -2: 
-                    return playerValue + 6;  // win: better shape
+                    return playerValue + 6;  // win: better shape (1 higher move, or rock when opponent played scissors)
                 default: 
-                    return playerValue;      // lose: worse shape
+                    return playerValue;      // lose: worse shape (not win, not draw)
             }
         }
 
@@ -49,12 +49,12 @@ namespace AdventOfCode
         {
             switch (outcome)
             {
-                case 'X':
-                    return opponentMove == 'A' ? 'Z' : (char)(opponentMove - '0' + 70);  // lose, play lower move (or highest if opponent plays lowest)
-                case 'Y':
-                    return (char)(opponentMove - '0' + 71);                              // draw, return same equivalent shape
-                default:
-                    return opponentMove == 'C' ? 'X' : (char)(opponentMove - '0' + 72);  // win, play higher move (or lowest if opponent plays highest)
+                case 'X':  // lose
+                    return opponentMove == 'A' ? 'Z' : (char)(opponentMove - '0' + 70);  // play lower move (or scissors if opponent plays rock)
+                case 'Y':  // draw
+                    return (char)(opponentMove - '0' + 71);                              // return same equivalent shape
+                default:   // win
+                    return opponentMove == 'C' ? 'X' : (char)(opponentMove - '0' + 72);  // play higher move (or rock if opponent plays scissors)
             }
         }
 
