@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace AdventOfCode
 {
@@ -45,15 +45,37 @@ namespace AdventOfCode
         }
 
         /// <summary>
-        /// Part 2: Find the sum of the badge priorities of each set of three rucksacks
+        /// Part 2: Find the sum of each common item contained in each set of 3 rucksacks
         /// </summary>
         public static int SumOfBadgePriorities()
         {
             string[] rucksacks = Helpers.ReadMultipleLines(_rucksackPrompt);
 
             int sum = 0;
+            
+            for (int i = 0; i < rucksacks.Length - 1; i += 3)  // increment over batches of three (ignore last empty line)
+            {
+                char badge = '\0';  // initialise badge to null character
 
+                var rucksack1 = new HashSet<char>(rucksacks[i + 1].ToCharArray());
+                var rucksack2 = new HashSet<char>(rucksacks[i + 2].ToCharArray());
 
+                foreach (char c in rucksacks[i])
+                {
+                    if (rucksack1.Contains(c) && rucksack2.Contains(c))  // O(1) contain checks of other rucksacks
+                    {
+                        badge = c;
+                        break;
+                    }   
+                }
+
+                if (badge != '\0')
+                    sum += GetPriorityValue(badge);
+                else
+                    throw new ArgumentException(String.Format("Rucksack batch #{0} does not have a badge", i / 3));
+            }
+
+            return sum;
         }
     }
 }
