@@ -69,13 +69,12 @@ namespace AdventOfCode
 
             foreach (string movePair in input)
             {
-                string[] moves = movePair.Trim('\r').Split(' ');
-
-                if (moves.Length != 2) break;  // TODO: strip last empty string from input
+                string[] moves = movePair.Split(' ');
 
                 char opponentMove = char.Parse(moves[0]);
 
                 char playerMove = getMoveFromOutcome(opponentMove, char.Parse(moves[1]));
+
                 score += GetRoundPoints(opponentMove, playerMove);
             }
 

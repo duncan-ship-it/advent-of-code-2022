@@ -6,7 +6,7 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Day3.SumOfBadgePriorities());
+            Console.WriteLine(Day4.CountOverlappingAssignmentPairs());
         }
     }
 }

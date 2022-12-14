@@ -66,7 +66,7 @@ namespace AdventOfCode
                     {
                         badge = c;
                         break;
-                    }   
+                    }
                 }
 
                 if (badge != '\0')

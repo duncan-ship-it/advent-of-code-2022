@@ -11,7 +11,10 @@ namespace AdventOfCode
         public static string[] ReadMultipleLines(string prompt = _defaultMultiLinePrompt)
         {
             Console.WriteLine(String.Format("{0} (In the next line, enter CTRL+Z)", prompt));
-            return Console.In.ReadToEnd().Split('\n');
+
+            string[] input = Console.In.ReadToEnd().Split('\n');
+
+            return input[0..(input.Length - 1)];  // ignore last empty string in input
         }
     }
 }
